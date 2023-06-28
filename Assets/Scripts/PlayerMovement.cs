@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] Bullet bulletPrefab;
     private Rigidbody2D _rigidbody;
     private bool _thrusting;
     private float _turnDirection;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this._thrusting = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
+        //player movemet
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.LeftArrow))
         {
             this._turnDirection = 1.0f;
@@ -29,6 +31,12 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             this._turnDirection = 0f;
+        }
+
+        //function call for bullet fire
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            Shoot();
         }
         
     }
@@ -44,5 +52,11 @@ public class PlayerMovement : MonoBehaviour
         {
             this._rigidbody.AddTorque(this._turnDirection * this.turnSpeed);
         }
+    }
+
+    private void Shoot()
+    {
+        Bullet bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+        bullet.Project(this.transform.up);
     }
 }
