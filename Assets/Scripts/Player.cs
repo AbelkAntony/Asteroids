@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     [SerializeField] Bullet bulletPrefab;
     private Rigidbody2D _rigidbody;
     private bool _thrusting;
@@ -58,5 +59,18 @@ public class PlayerMovement : MonoBehaviour
     {
         Bullet bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Project(this.transform.up);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Asteroid")
+        {
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = 0f;
+
+            this.gameObject.SetActive(false);
+
+            gameManager.PlayerDied();
+        }
     }
 }
