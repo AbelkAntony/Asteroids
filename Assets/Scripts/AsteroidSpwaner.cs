@@ -5,7 +5,6 @@ using UnityEngine;
 public class AsteroidSpwaner : MonoBehaviour
 {
     public Asteroid asteroidPrefab;
-    public ParticleSystem explosion;
     public float spwanRate = 2f;
     public int spwanAmount = 1;
     public float spwanDistance = 15f;

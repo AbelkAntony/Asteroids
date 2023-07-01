@@ -5,10 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] ParticleSystem explosion;
     public int lives = 3;
     public float respawnTime = 3f;
+
+    public void AsteroidDestroyed(Asteroid asteroid)
+    {
+        this.explosion.transform.position = asteroid.transform.position;
+        this.explosion.Play();
+    }
     public void PlayerDied()
     {
+        this.explosion.transform.position = this.player.transform.position;
+        this.explosion.Play();
         lives--;
 
         if(lives <= 0)
