@@ -8,11 +8,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] ParticleSystem explosion;
     public int lives = 3;
     public float respawnTime = 3f;
+    public int score = 0;
 
     public void AsteroidDestroyed(Asteroid asteroid)
     {
         this.explosion.transform.position = asteroid.transform.position;
         this.explosion.Play();
+
+        if (asteroid.size < 0.75f)
+        {
+            this.score += 100;
+        }
+        else if (asteroid.size < 1.2f)
+        {
+            this.score += 50;
+        }
+        else
+        {
+            this.score += 25; 
+        }
     }
     public void PlayerDied()
     {
@@ -46,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        //TODO
+        this.lives = 3;
+        this.score = 0;
+
+        Invoke(nameof(PlayerSpwan), this.respawnTime);
     }
 }
