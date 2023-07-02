@@ -12,3 +12,9 @@
 - Changes in collision matrix
 - Invoke function to respawn spaceship after a time interval
 - Reset life and score of the player after game over.
+
+
+
+
+https://github.com/AbelkAntony/Asteroids/assets/122546743/8c73b825-a2f2-493a-b18c-4ff8317453fa
+
