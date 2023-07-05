@@ -6,16 +6,18 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI lifeText;
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
-    public int lives = 3;
-    public float respawnTime = 3f;
-    public int score = 0;
+    private int lives = 3;
+    private float respawnTime = 3f;
+    private int score = 0;
 
 
     private void Update()
     {
         scoreText.text = score.ToString();
+        lifeText.text = lives.ToString();
     }
     public void AsteroidDestroyed(Asteroid asteroid)
     {
