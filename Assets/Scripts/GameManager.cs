@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
     public int lives = 3;
     public float respawnTime = 3f;
     public int score = 0;
 
+
+    private void Update()
+    {
+        scoreText.text = score.ToString();
+    }
     public void AsteroidDestroyed(Asteroid asteroid)
     {
         this.explosion.transform.position = asteroid.transform.position;
