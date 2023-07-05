@@ -5,19 +5,31 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI lifeText;
+    [SerializeField] UI ui;
+
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
     private int lives = 3;
     private float respawnTime = 3f;
     private int score = 0;
 
-
-    private void Update()
+    private void Awake()
     {
-        scoreText.text = score.ToString();
-        lifeText.text = lives.ToString();
+        ui.SetState(false);
+        Time.timeScale = 0f;
+    }
+
+
+    public void NewGame()
+    {
+        Time.timeScale = 1f;
+        ui.SetState(true);
+        this.lives = 3;
+        this.score = 0;
+        ui.DisplayLife(lives);
+        ui.DisplayScore(score);
+
+        PlayerSpwan();
     }
     public void AsteroidDestroyed(Asteroid asteroid)
     {
@@ -36,6 +48,7 @@ public class GameManager : MonoBehaviour
         {
             this.score += 25; 
         }
+        ui.DisplayScore(score);
     }
     public void PlayerDied()
     {
@@ -49,6 +62,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            ui.DisplayLife(lives);
             Invoke(nameof(PlayerSpwan),this.respawnTime);
         }
     }
@@ -69,9 +83,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        this.lives = 3;
-        this.score = 0;
-
-        Invoke(nameof(PlayerSpwan), this.respawnTime);
+        Time.timeScale = 0f;
+        ui.DisplayGameOver();
     }
 }
