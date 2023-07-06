@@ -9,7 +9,7 @@ public class AsteroidSpwaner : MonoBehaviour
     public int spwanAmount = 1;
     public float spwanDistance = 15f;
     public float trajectoryVariance = 15f;
-    private void Start()
+    public void SpwanAsteroids()
     {
         InvokeRepeating(nameof(Spwan),this.spwanRate, this.spwanRate);
     }

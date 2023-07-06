@@ -9,14 +9,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
+    [SerializeField] AsteroidSpwaner asteroidSpwaner;
     private int lives = 3;
     private float respawnTime = 3f;
     private int score = 0;
 
+    public int GetScore() { return score; }
+
+
     private void Awake()
     {
         ui.SetState(false);
-        Time.timeScale = 0f;
+        ui.DisplayGameOver(false);
+        //Time.timeScale = 0f;
     }
 
 
@@ -28,8 +33,9 @@ public class GameManager : MonoBehaviour
         this.score = 0;
         ui.DisplayLife(lives);
         ui.DisplayScore(score);
-
+        ui.DisplayGameOver(false);
         PlayerSpwan();
+        asteroidSpwaner.SpwanAsteroids();
     }
     public void AsteroidDestroyed(Asteroid asteroid)
     {
@@ -83,7 +89,11 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Time.timeScale = 0f;
-        ui.DisplayGameOver();
+        
+        ui.DisplayGameOver(true);
+        asteroidSpwaner.CancelInvoke();
+        ui.SetState(false);
+
     }
+
 }

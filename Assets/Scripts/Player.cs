@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         }
 
         //function call for bullet fire
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }

@@ -11,7 +11,9 @@ public class UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI lifeText;
     [SerializeField] GameObject startButton;
     [SerializeField] GameObject gameName;
+    [SerializeField] GameObject gameOver;
 
+ 
     public void SetState(bool state)
     {
         scoreTitle.gameObject.SetActive(state);
@@ -25,6 +27,7 @@ public class UI : MonoBehaviour
         }
         else
         {
+            gameOver.SetActive(true);
             startButton.SetActive(true);
             gameName.SetActive(true);
         }
@@ -41,8 +44,9 @@ public class UI : MonoBehaviour
         lifeText.text = lives.ToString();
     }
 
-    public void DisplayGameOver()
+    public void DisplayGameOver(bool state)
     {
-        //todo
+        gameOver.SetActive(state);
+       
     }
 }
