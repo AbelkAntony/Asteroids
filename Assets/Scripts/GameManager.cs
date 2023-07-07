@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private float respawnTime = 3f;
     private int score;
     private Vector3 randomPosition;
+    private int scoreMultiplier;
 
     public int GetScore() { return score; }
 
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         ui.SetState(true);
         this.lives = 1;
         this.score = 0;
+        this.scoreMultiplier = 1;
         ui.DisplayLife(lives);
         ui.DisplayScore(score);
         ui.DisplayGameOver(false);
@@ -74,7 +76,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Vector3 RandomizePosition()
+    public Vector3 GetRandomPosition()
     {
         Bounds bounds = this.gridArea.bounds;
 
@@ -99,6 +101,12 @@ public class GameManager : MonoBehaviour
         this.player.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
+    public void TurnOffCollision()
+    {
+        this.player.gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
+        Invoke(nameof(TurnOnCollission), 5f);
+    }
+
     private void GameOver()
     {
         
@@ -106,6 +114,17 @@ public class GameManager : MonoBehaviour
         asteroidSpwaner.CancelInvoke();
         ui.SetState(false);
 
+    }
+
+    public void SetScoreMultiplier(int multiplier)
+    {
+        scoreMultiplier = multiplier;
+        Invoke(nameof(ResetScoreMultiplier), 5f);
+    }
+
+    private void ResetScoreMultiplier()
+    {
+        scoreMultiplier = 1;
     }
 
 }

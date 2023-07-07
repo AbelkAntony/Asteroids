@@ -455,7 +455,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &160689307
 GameObject:
@@ -467,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160689309}
   - component: {fileID: 160689308}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,15 +481,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160689307}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bff1a447c76937e449dc1393e15fadd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1836692636}
   killOrbPrefab: {fileID: 4389629591322776209, guid: 9eab587863e0adb40bfdcb411d508477, type: 3}
-  doubleScore: {fileID: 0}
-  shield: {fileID: 0}
+  OrbPrefab: {fileID: 7199443690809133536, guid: 84f50593bca7f674f80e8ad42d08e954, type: 3}
   scorelimit: 500
 --- !u!4 &160689309
 Transform:
@@ -5611,7 +5610,7 @@ GameObject:
   - component: {fileID: 665987717}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5702,7 +5701,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &665987717
 MonoBehaviour:
@@ -5936,7 +5935,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &885773931
 GameObject:
@@ -5994,7 +5993,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &954239306
 GameObject:
@@ -6505,7 +6504,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1393824710
 GameObject:
@@ -6857,7 +6856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1490003365}
-  gridArea: {fileID: 0}
+  gridArea: {fileID: 1393824711}
   player: {fileID: 665987717}
   explosion: {fileID: 162943031}
   asteroidSpwaner: {fileID: 954546913}
