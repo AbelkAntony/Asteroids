@@ -6,13 +6,14 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] UI ui;
-
+    [SerializeField] BoxCollider2D gridArea;
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] AsteroidSpwaner asteroidSpwaner;
-    private int lives = 3;
+    public int lives;
     private float respawnTime = 3f;
-    private int score = 0;
+    private int score;
+    private Vector3 randomPosition;
 
     public int GetScore() { return score; }
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         ui.SetState(true);
-        this.lives = 3;
+        this.lives = 1;
         this.score = 0;
         ui.DisplayLife(lives);
         ui.DisplayScore(score);
@@ -71,6 +72,17 @@ public class GameManager : MonoBehaviour
             ui.DisplayLife(lives);
             Invoke(nameof(PlayerSpwan),this.respawnTime);
         }
+    }
+
+    public Vector3 RandomizePosition()
+    {
+        Bounds bounds = this.gridArea.bounds;
+
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = Random.Range(bounds.min.y, bounds.max.y);
+
+        randomPosition = new Vector3(x, y, 0f);
+        return randomPosition;
     }
 
     private void PlayerSpwan()
