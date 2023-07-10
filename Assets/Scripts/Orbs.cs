@@ -5,56 +5,57 @@ using UnityEngine;
 public class Orbs : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
-    [SerializeField] GameObject killOrbPrefab;
-    [SerializeField] GameObject OrbPrefab;
-    private GameObject orb;
+    [SerializeField] GameObject orb;
+    //private GameObject orb;
     //public GameObject doubleScore;
     //public GameObject shield;
     public int scorelimit = 500;
     private Vector3 randomPosition;
+    private int getRandomOrb;
 
+    public int GetScoreLimit() { return scorelimit; }
     private void Start()
     {
-        orb = Instantiate(OrbPrefab);
-        orb.SetActive(false);
+        orb.SetActive(false); 
     }
     private void Update()
     {
         if(scorelimit <= gameManager.GetScore())
         {
-            scorelimit += scorelimit;
-            ActivateOrb();
             Debug.Log("orb");
+            
+            SpawnOrb();
+            scorelimit += 500;
         }
     }
 
-    private void ActivateOrb()
+    public void SpawnOrb()
     {
         randomPosition = gameManager.GetRandomPosition();
+        Debug.Log("random position");
         orb.transform.position = randomPosition;
         orb.SetActive(true);
         Debug.Log("orbActivate");
-      
+        getRandomOrb = Random.Range(1, 4);
+
+        switch (getRandomOrb)
+        {
+            case 1:
+                //todo
+                break;
+            case 2:
+                //todo
+                break;
+            case 3:
+                //todo
+                break;
+        }
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+ 
+    public void ActivateOrb()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            orb.SetActive(false);
-            Debug.Log("Orb False collision");
-        }
-    }
-
-    private void OnCollisionEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            orb.SetActive(false);
-            Debug.Log("Orb False");
-        }
-        int getRandomOrb = Random.Range(1, 4);
-
         switch (getRandomOrb)
         {
             case 1:
@@ -68,13 +69,12 @@ public class Orbs : MonoBehaviour
                 break;
         }
     }
+   
 
     private void KillOrb()
     {
 
-        GameObject killOrb = Instantiate(killOrbPrefab);
-        killOrbPrefab.transform.localScale = Vector3.one * Time.deltaTime;
-        Debug.Log("Kill Orb");
+       
     }
 
     private void DoubleScore()

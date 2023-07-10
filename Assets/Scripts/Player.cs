@@ -73,4 +73,14 @@ public class Player : MonoBehaviour
             gameManager.PlayerDied();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Orb")
+        {
+
+            other.gameObject.SetActive(false);
+            gameManager.OrbTaken();
+        }
+    }
 }

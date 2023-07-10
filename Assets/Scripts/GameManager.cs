@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Orbs orb;
     [SerializeField] UI ui;
     [SerializeField] BoxCollider2D gridArea;
     [SerializeField] Player player;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         ui.SetState(false);
         ui.DisplayGameOver(false);
+        this.player.gameObject.SetActive(false);
         //Time.timeScale = 0f;
     }
 
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
     {
         this.player.gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
         Invoke(nameof(TurnOnCollission), 5f);
+        Debug.Log("Shield off");
     }
 
     private void GameOver()
@@ -125,6 +128,11 @@ public class GameManager : MonoBehaviour
     private void ResetScoreMultiplier()
     {
         scoreMultiplier = 1;
+    }
+
+    public void OrbTaken()
+    {
+        orb.ActivateOrb();
     }
 
 }
