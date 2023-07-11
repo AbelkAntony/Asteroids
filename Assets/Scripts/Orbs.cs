@@ -42,7 +42,7 @@ public class Orbs : MonoBehaviour
         orb.transform.position = randomPosition;
         orb.SetActive(true);
         Debug.Log("orbActivate");
-        getRandomOrb = 3;// Random.Range(1, 4);
+        getRandomOrb = Random.Range(1, 4);
         ui.OrbUi(getRandomOrb);
      
 
