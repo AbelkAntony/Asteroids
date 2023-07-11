@@ -13,7 +13,11 @@
 - Invoke function to respawn spaceship after a time interval
 - Reset life and score of the player after game over.
 
+Feature Add
 
+- Score double orb
+- Shield orb
+- Kill all asteroids 
 
 
 
