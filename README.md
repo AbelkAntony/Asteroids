@@ -15,9 +15,9 @@
 
 Feature Add
 
-- Score double orb
-- Shield orb
-- Kill all asteroids 
+- Kill Orb to destroy all the asteroids that currently spawn.
+- Double score Orb to get score doubled.
+- Shield Orb to avoid collision with asteroids.
 
 
 
