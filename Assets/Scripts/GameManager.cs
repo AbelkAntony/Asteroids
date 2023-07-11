@@ -11,20 +11,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] AsteroidSpwaner asteroidSpwaner;
-    public int lives;
+    private float orbTimeintervel = 5f;
+    public int lives =3;
     private float respawnTime = 3f;
     private int score;
     private Vector3 randomPosition;
     private int scoreMultiplier;
 
-    public int GetScore() { return score; }
-
+    public int   GetScore()             {    return score;              }
+    public float GetOrbTimeIntervel()   {    return orbTimeintervel;    }
 
     private void Awake()
     {
         ui.SetState(false);
         ui.DisplayGameOver(false);
         this.player.gameObject.SetActive(false);
+        ui.OrbActivated(false);
         //Time.timeScale = 0f;
     }
 
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         ui.SetState(true);
-        this.lives = 1;
+        this.lives = 3;
         this.score = 0;
         this.scoreMultiplier = 1;
         ui.DisplayLife(lives);
@@ -101,13 +103,15 @@ public class GameManager : MonoBehaviour
     private void TurnOnCollission()
     {
         this.player.gameObject.layer = LayerMask.NameToLayer("Player");
+        Debug.Log("Shield off");
+        ui.OrbActivated(false);
     }
 
     public void TurnOffCollision()
     {
         this.player.gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
-        Invoke(nameof(TurnOnCollission), 5f);
-        Debug.Log("Shield off");
+        Invoke(nameof(TurnOnCollission), orbTimeintervel+5);
+        
     }
 
     private void GameOver()
@@ -116,23 +120,39 @@ public class GameManager : MonoBehaviour
         ui.DisplayGameOver(true);
         asteroidSpwaner.CancelInvoke();
         ui.SetState(false);
+        orb.ResetScoreLimit();
 
     }
 
     public void SetScoreMultiplier(int multiplier)
     {
         scoreMultiplier = multiplier;
-        Invoke(nameof(ResetScoreMultiplier), 5f);
+        Invoke(nameof(ResetScoreMultiplier), orbTimeintervel);
     }
 
     private void ResetScoreMultiplier()
     {
         scoreMultiplier = 1;
+        Debug.Log("Double score off");
+        ui.OrbActivated(false);
+
     }
 
     public void OrbTaken()
     {
         orb.ActivateOrb();
     }
+
+    public void KillAllAsteroids()
+    {
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        for(int i = 0; i< asteroids.Length-1;i++)
+        {
+            Destroy(asteroids[i].gameObject);
+        }
+        ui.OrbActivated(false);
+
+    }
+
 
 }

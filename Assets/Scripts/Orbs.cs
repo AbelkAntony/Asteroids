@@ -6,6 +6,7 @@ public class Orbs : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject orb;
+    [SerializeField] UI ui;
     //private GameObject orb;
     //public GameObject doubleScore;
     //public GameObject shield;
@@ -29,6 +30,11 @@ public class Orbs : MonoBehaviour
         }
     }
 
+    public void ResetScoreLimit()
+    {
+        scorelimit = 500;
+    }
+
     public void SpawnOrb()
     {
         randomPosition = gameManager.GetRandomPosition();
@@ -36,26 +42,16 @@ public class Orbs : MonoBehaviour
         orb.transform.position = randomPosition;
         orb.SetActive(true);
         Debug.Log("orbActivate");
-        getRandomOrb = Random.Range(1, 4);
-
-        switch (getRandomOrb)
-        {
-            case 1:
-                //todo
-                break;
-            case 2:
-                //todo
-                break;
-            case 3:
-                //todo
-                break;
-        }
+        getRandomOrb = 3;// Random.Range(1, 4);
+        ui.OrbUi(getRandomOrb);
+     
 
     }
 
  
     public void ActivateOrb()
     {
+        ui.OrbActivated(true);
         switch (getRandomOrb)
         {
             case 1:
@@ -68,18 +64,22 @@ public class Orbs : MonoBehaviour
                 Shield();
                 break;
         }
+        
     }
    
 
     private void KillOrb()
     {
+        gameManager.KillAllAsteroids();
+        
 
-       
     }
 
     private void DoubleScore()
     {
+
         gameManager.SetScoreMultiplier(2);
+        
         Debug.Log("Double score");
     }
 
